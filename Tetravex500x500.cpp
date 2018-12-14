@@ -1,4 +1,4 @@
-//Créateur : TALIBI YOUNESS
+//CrÃ©ateur : TALIBI YOUNESS
 
 
 #include <stdio.h>
@@ -93,10 +93,8 @@ bool VerificationDeplacement(int index_recent, int i) {
 
 
 
-//check find solution
 bool TetravexBacktracking() {
     int pos_recent = 0;
-    //initialize
     child_id[0] = 0;
     for(int i = 0; i <= ligne * col; i ++) NonVisiter.insert(i);
     while(true) {
@@ -150,7 +148,7 @@ int main() {
     }
     int cnt = 0;
     if(TetravexBacktracking()) {
-        printf("***** TETRAVEX est bien été résolut *****");
+        printf("***** TETRAVEX est bien Ã©tÃ© rÃ©solut *****");
         freopen(FichierResultat, "w", stdout);
         printf("%d %d\n", ligne, col);
         for(int i = 0; i < ligne * col; i ++) {
