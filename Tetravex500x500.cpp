@@ -1,4 +1,3 @@
-//Créateur : TALIBI YOUNESS
 
 
 #include <stdio.h>
