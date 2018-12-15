@@ -1,6 +1,6 @@
 # TETRAVEX_Solver
 
-Développeur : TALIBI Youness
+Développeur : 
 
 Tetravex est un jeu de puzzle dont le but est de faire en sorte que le numéro d'un bord d'un carré soit le même que celui du carré adjacent.
 
