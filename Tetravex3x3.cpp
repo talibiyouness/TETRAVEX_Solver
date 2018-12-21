@@ -1,10 +1,12 @@
+//DÃ©veloppeur : YOUNESS
+
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
 #include <set>
 using namespace std;
 
-// La taille maximale d'un tableau donné est N * N
+// La taille maximale d'un tableau donnÃ© est N * N
 #define N 800
 
 const int Gauche = 0;
@@ -13,7 +15,7 @@ const int Droite = 2;
 const int Bas = 3;
 const double temps_limit = 120;
 
-// Classe de Carré
+// Classe de CarrÃ©
 class Carre {
 public:
     int gauche;
@@ -35,7 +37,7 @@ public:
 
 
 
-// Vérifiez que les deux carré, le premier et le deuxième peut être voisin
+// VÃ©rifiez que les deux carrÃ©, le premier et le deuxiÃ¨me peut Ãªtre voisin
 // le type est la direction du voisin
 
 bool VerificationPlateau(Carre premier, Carre deuxieme, int type) {
@@ -56,18 +58,18 @@ bool VerificationPlateau(Carre premier, Carre deuxieme, int type) {
 }
 
 // Pour un plateau, nous indexons 0, 1, 2, ... (ligne * col - 1) 
-// en continu pour chaque carré de plateau.
+// en continu pour chaque carrÃ© de plateau.
 
 Carre carre[N * N];
 bool visiter[N * N];
-int ordre[N * N]; //Tableau qu’il contient la solution des indexes des i ème carré.
+int ordre[N * N]; //Tableau quâ€™il contient la solution des indexes des i Ã¨me carrÃ©.
 int ligne, col;
-int child_id[N * N];//l'index du carré qui doit être vérifié pour déplacer le carré à la ième carré.
-set<int> NonVisiter;//Un conteneur associatif  contient l'index de carré non visité
-set<int>::iterator it;//itérateur qu’il va m’aider pour affecter le résultat de la recherche depuis le conteneur associatif.
-clock_t temps_debut = clock();//Temps de début
+int child_id[N * N];//l'index du carrÃ© qui doit Ãªtre vÃ©rifiÃ© pour dÃ©placer le carrÃ© Ã  la iÃ¨me carrÃ©.
+set<int> NonVisiter;//Un conteneur associatif  contient l'index de carrÃ© non visitÃ©
+set<int>::iterator it;//itÃ©rateur quâ€™il va mâ€™aider pour affecter le rÃ©sultat de la recherche depuis le conteneur associatif.
+clock_t temps_debut = clock();//Temps de dÃ©but
 
-// Vérifie la limite de temps actuelle temps_limit
+// VÃ©rifie la limite de temps actuelle temps_limit
 bool VerificationTemps() {
     clock_t temps_fin = clock();
     if((double) (temps_fin - temps_debut) / CLOCKS_PER_SEC > temps_limit) {
@@ -76,10 +78,10 @@ bool VerificationTemps() {
     return true;
 }
 
-// Vérifier que carre [i] peut être déplacé vers le carré actuel
+// VÃ©rifier que carre [i] peut Ãªtre dÃ©placÃ© vers le carrÃ© actuel
 bool VerificationDeplacement(int index_recent, int i) {
-    int ligne_recent = index_recent / col; // index de ligne du carré actuel
-    int colonne_recent = index_recent % col; // index de colonne du carré actuel
+    int ligne_recent = index_recent / col; // index de ligne du carrÃ© actuel
+    int colonne_recent = index_recent % col; // index de colonne du carrÃ© actuel
     bool deplacer = true;
     if(ligne_recent != 0) {
         Carre haut_Tetravex = carre[ordre[index_recent - col]];
@@ -106,23 +108,23 @@ bool TetravexBacktracking() {
     child_id[0] = 0;
     for(int i = 0; i <= ligne * col; i ++) NonVisiter.insert(i);
     while(true) {
-        //Vérifier le temps
+        //VÃ©rifier le temps
         if(!VerificationTemps()) {
             return false;
         }
-        //Vérifier le déplacement de tout les carrés dans le plateau
+        //VÃ©rifier le dÃ©placement de tout les carrÃ©s dans le plateau
         if(pos_recent == ligne * col) {
             return true;
         }
         
-        // Trouver et définir l'id qui peut être possible move to pos_recent
+        // Trouver et dÃ©finir l'id qui peut Ãªtre possible move to pos_recent
         it = NonVisiter.lower_bound(child_id[pos_recent]);
         child_id[pos_recent] = *it;
         
-        // Vérifier le déplacement impossible vers pos_recent
+        // VÃ©rifier le dÃ©placement impossible vers pos_recent
         if(child_id[pos_recent] == ligne * col) {
             pos_recent --;
-            // Vérifier la boucle pour tous les statuts possibles
+            // VÃ©rifier la boucle pour tous les statuts possibles
             if(pos_recent == -1) {
                 return false;
             }
@@ -130,13 +132,13 @@ bool TetravexBacktracking() {
             child_id[pos_recent] ++;
             continue;
         }
-        // Vérification le déplacement de carré au plateau
+        // VÃ©rification le dÃ©placement de carrÃ© au plateau
         int id = child_id[pos_recent];
         if(!VerificationDeplacement(pos_recent, id)) {
             child_id[pos_recent] ++;
             continue;
         }
-        // Déplacer l'id du carré vers la position du plateau
+        // DÃ©placer l'id du carrÃ© vers la position du plateau
         NonVisiter.erase(id);
         ordre[pos_recent] = id;
         pos_recent ++;
@@ -163,7 +165,7 @@ int main() {
 //Trouver la solution 
 
     if(TetravexBacktracking()) {
-        printf("***** TETRAVEX est bien été résolut *****");
+        printf("***** TETRAVEX est bien Ã©tÃ© rÃ©solut *****");
         freopen(FichierResultat, "w", stdout);
         printf("%d %d\n", ligne, col);
         for(int i = 0; i < ligne * col; i ++) {
